@@ -1,0 +1,12 @@
+{
+    "name": "gradiproducts",
+    "wrapper": "div",
+    "sections": {
+        "main": {
+            "type": "productos-gradiweb"
+        }
+    },
+    "order": [
+
+    ]
+}
