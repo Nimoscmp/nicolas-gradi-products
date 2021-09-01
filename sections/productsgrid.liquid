@@ -1,8 +1,50 @@
 <section>
-    <h2>Products</h2>
-    <ul>
-        <li>A</li>
-        <li>B</li>
-        <li>C</li>
-    </ul>
+    <h2>
+        You can see all our products
+    </h2>
+    <div>
+
+        {% assign collection_page = collections[section.settings.featured_collection] %}
+        {% for product in collection_page.products %}
+        <div>
+            <h5>
+                <strong>{{ product.title }}</strong>
+            </h5>
+            <span>
+                {{ product.collections.title }}
+            </span>
+            <span>
+                {% for collection in product.collections %}
+                    {% unless collection.title == "All" %}
+                        {{ collection.title }}
+                    {% endunless %}
+                {% endfor %}
+            </span>
+            <img 
+                src="{{ product | img_url }}" 
+                alt="{{ product.title }}"
+                width="100"
+                height="100"
+                loading="lazy"
+            >
+            <span><strong>{{ product.price | money }}</strong></span>
+        </div>
+        {% endfor %}
+        
+    </div>
+    <p>Total products in collection: {{ collection.all_products_count }}</p>
+
 </section>
+
+{% schema %}
+{
+    "name": "my schema",
+    "settings": [
+        {
+            "type": "collection",
+            "id": "featured_collection",
+            "label": "Featured collection"
+        }
+    ]
+}
+{% endschema %}
