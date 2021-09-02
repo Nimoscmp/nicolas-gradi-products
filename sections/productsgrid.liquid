@@ -6,28 +6,30 @@
     <div>
         {% assign collection_page = collections[section.settings.featured_collection] %}
 
-        <label for="product_tags">Select by tag</label>
-        <select name="product_tags" id="product_tags">
-            <option value="">all</option>
+        <label for="product_tag_gradi">Select by tag</label>
+        <select name="product_tag_gradi" id="product_tag_gradi">
+            <option value="all">all</option>
             {% for product_tag in collection_page.all_tags %}
-                <option value="{{ product_tag }}">{{ product_tag }}</option>
+                <option value="{{ product_tag }}" >{{ product_tag }}</option>
             {% endfor %}
         </select>
 
         <label for="product_number_gradi">Select the number of products</label>
         <select name="product_number_gradi" id="product_number_gradi">
-            {% assign array_string = "5, 6, 7, 8, 9, 10" %}
+            {% assign array_string = "1, 2, 3, 4, 5, 6, 7, 8, 9" %}
             {% assign array_numbers = array_string | split: "," %}
+
             {% for number in array_numbers %}
-                <option value="{{ number }}">{{ number }}</option>
+                <option value="{{ number }}" >{{ number }}</option>
             {% endfor %}
+            <option value="10" selected>10</option>
         </select>
     </div>
 
-    <div id="product-cart-gradi">
+    <div id="products_card_gradi" style="display: flex;">
 
         {% for product in collection_page.products %}
-        <div>
+        <div class="product_card_gradi">
             <h5>
                 <strong>{{ product.title }}</strong>
             </h5>
@@ -41,9 +43,9 @@
                     {% endunless %}
                 {% endfor %}
             </div>
-            <div>
+            <div class="tag_box">
                 {% for tag in product.tags %}
-                    <span>{{ tag }}</span>
+                    <span class="specific_tag_gradi"><em>{{ tag }}</em></span>
                 {% endfor %}
             </div>
             <a href="{{ product.url }}">
@@ -62,14 +64,9 @@
 
     </div>
     <p>Total products in collection: {{ collection.all_products_count }}</p>
-
 </section>
 
-<script>
-    const select = document.querySelector('#product_number_gradi');
-    let value = select.options[select.selectedIndex].value;
-    console.log(value);
-</script>
+<script src="{{ 'productsgrid.js' | asset_url }}" async></script>
 
 {% schema %}
 {
@@ -79,11 +76,6 @@
             "type": "collection",
             "id": "featured_collection",
             "label": "Featured collection"
-        },
-        {
-            "type": "variant",
-            "id": "existing_variants",
-            "label": "Existing variants"
         }
     ]
 }
