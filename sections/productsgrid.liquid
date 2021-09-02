@@ -2,9 +2,30 @@
     <h2>
         You can see all our products
     </h2>
-    <div>
 
+    <div>
         {% assign collection_page = collections[section.settings.featured_collection] %}
+
+        <label for="product_tags">Select by tag</label>
+        <select name="product_tags" id="product_tags">
+            <option value="">all</option>
+            {% for product_tag in collection_page.all_tags %}
+                <option value="{{ product_tag }}">{{ product_tag }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="product_number_gradi">Select the number of products</label>
+        <select name="product_number_gradi" id="product_number_gradi">
+            {% assign array_string = "5, 6, 7, 8, 9, 10" %}
+            {% assign array_numbers = array_string | split: "," %}
+            {% for number in array_numbers %}
+                <option value="{{ number }}">{{ number }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div id="product-cart-gradi">
+
         {% for product in collection_page.products %}
         <div>
             <h5>
@@ -13,28 +34,42 @@
             <span>
                 {{ product.collections.title }}
             </span>
-            <span>
+            <div>
                 {% for collection in product.collections %}
                     {% unless collection.title == "All" %}
-                        {{ collection.title }}
+                        <span>{{ collection.title }}</span>
                     {% endunless %}
                 {% endfor %}
-            </span>
-            <img 
-                src="{{ product | img_url }}" 
-                alt="{{ product.title }}"
-                width="100"
-                height="100"
-                loading="lazy"
-            >
+            </div>
+            <div>
+                {% for tag in product.tags %}
+                    <span>{{ tag }}</span>
+                {% endfor %}
+            </div>
+            <a href="{{ product.url }}">
+                <img 
+                    src="{{ product | img_url }}" 
+                    alt="{{ product.title }}"
+                    width="100"
+                    height="100"
+                    loading="lazy"
+                >
+            </a>
             <span><strong>{{ product.price | money }}</strong></span>
+
         </div>
         {% endfor %}
-        
+
     </div>
     <p>Total products in collection: {{ collection.all_products_count }}</p>
 
 </section>
+
+<script>
+    const select = document.querySelector('#product_number_gradi');
+    let value = select.options[select.selectedIndex].value;
+    console.log(value);
+</script>
 
 {% schema %}
 {
@@ -44,6 +79,11 @@
             "type": "collection",
             "id": "featured_collection",
             "label": "Featured collection"
+        },
+        {
+            "type": "variant",
+            "id": "existing_variants",
+            "label": "Existing variants"
         }
     ]
 }
