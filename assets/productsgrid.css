@@ -1,0 +1,32 @@
+#gradisection {
+  display: flex;
+}
+
+#gradidiv {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0.5rem;
+  padding: 0.5rem;
+}
+
+.gradidiv__product {
+  display: flex;
+  flex-direction: column;
+  width: 22rem;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  border-top: 2px solid #eaeaea;
+  border-bottom: 2px solid #ccc;
+}
+
+.gradidiv__product__h5, .gradidiv__product__title, .gradidiv__product__coll, .gradidiv__product__tags, .gradidiv__product__link {
+  width: 100%;
+}
+
+.gradidiv__product__h5 {
+  text-transform: uppercase;
+}
+
+.gradidiv__product__link:link, .gradidiv__product__link:visited {
+  text-decoration: none;
+}

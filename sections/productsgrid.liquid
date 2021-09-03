@@ -1,134 +1,111 @@
-<section>
-    <h2>
-        You can see all our products
-    </h2>
+{{ 'productsgrid.css' | asset_url | stylesheet_tag }}
 
-    <!-- <div>
-        {% assign collection_page = collections[section.settings.featured_collection] %}
+<section class="gradisection">
+  <h2>
+    You can see all our products
+  </h2>
 
-        <label for="product_tag_gradi">Select by tag</label>
-        <select name="product_tag_gradi" id="product_tag_gradi">
-            <option value="all">all</option>
-            {% for product_tag in collection_page.all_tags %}
-                <option value="{{ product_tag }}" >{{ product_tag }}</option>
-            {% endfor %}
-        </select>
+  <div id="gradidiv">
+    {%- liquid
+      assign collection_page = collections[section.settings.featured_collection]
+      assign products_number = section.settings.products_number | minus: 1
+      assign product_tag = section.settings.select_by_tag
+      assign count = 0
+    -%}
 
-        <label for="product_number_gradi">Select the number of products</label>
-        <select name="product_number_gradi" id="product_number_gradi">
-            {% assign array_string = "1, 2, 3, 4, 5, 6, 7, 8, 9" %}
-            {% assign array_numbers = array_string | split: "," %}
+    {% for product in collection_page.products %}
+      {% if count > products_number %}
+        {% break %}
+      {% endif %}
 
-            {% for number in array_numbers %}
-                <option value="{{ number }}" >{{ number }}</option>
-            {% endfor %}
-            <option value="10" selected>10</option>
-        </select>
-    </div> -->
+      {% for tag in product.tags %}
+        {% if product_tag == "all" or product_tag == tag %}
+          <div class="gradidiv__product">
+            <h5 class="gradidiv__product__h5">
+              <strong>{{ product.title }}</strong>
+            </h5>
+            <div class="gradidiv__product__coll">
+              {% for collection in product.collections %}
+                {% unless collection.title == "All" %}
+                  <span>{{ collection.title }}</span>
+                {% endunless %}
+              {% endfor %}
+            </div>
+            <div class="gradidiv__product__tags">
+              {% for tag in product.tags %}
+                <span class="specific_tag_gradi"><em>{{ tag }}</em></span>
+              {% endfor %}
+            </div>
+            <a href="{{ product.url }}" class="gradidiv__product__link">
+              <img 
+                src="{{ product | img_url }}" 
+                alt="{{ product.title }}" 
+                width="150"
+                height="150"
+                loading="lazy"
+                class="gradidiv__product__img">
+            </a>
+            <span><strong>{{ product.price | money }}</strong></span>
+          </div>
 
-    <div id="products_card_gradi" style="display: flex;">
-        {%- liquid 
-            assign products_number = section.settings.products_number | minus: 1
-            assign product_tag = section.settings.select_by_tag
-            assign count = 0
-        -%}       
+          {% assign count = count | plus: 1 %}
 
-        {% for product in collection_page.products %}
-            {% if count > products_number %}
-                {% break %}
-            {% endif %}    
+          {% if product_tag == 'all' %}
+            {% break %}
+          {% endif %}
 
-            {% for tag in product.tags %}                
-                {% if product_tag == "all" or product_tag == tag %}
-                    <div class="product_card_gradi">
-                        <h5>
-                            <strong>{{ product.title }}</strong>
-                        </h5>
-                        <span>
-                            {{ product.collections.title }}
-                        </span>
-                        <div>
-                            {% for collection in product.collections %}
-                                {% unless collection.title == "All" %}
-                                    <span>{{ collection.title }}</span>
-                                {% endunless %}
-                            {% endfor %}
-                        </div>
-                        <div class="tag_box">
-                            {% for tag in product.tags %}
-                                <span class="specific_tag_gradi"><em>{{ tag }}</em></span>
-                            {% endfor %} 
-                        </div>
-                        <a href="{{ product.url }}">
-                            <img 
-                                src="{{ product | img_url }}" 
-                                alt="{{ product.title }}"
-                                width="100"
-                                height="100"
-                                loading="lazy"
-                            >
-                        </a>
-                        <span><strong>{{ product.price | money }}</strong></span>
-                    </div> 
-                    
-                    {% assign count = count | plus: 1 %}
-                    
-                    {% if product_tag == 'all' %}
-                        {% break %}
-                    {% endif %}
-                    
-                {% endif %}                    
-            {% endfor %}   
-        {% endfor %}
-    </div>
-    <p>Total products in collection: {{ collection.all_products_count }}</p>
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+  </div>
+  <p>Total products in collection: {{ collection.all_products_count }}</p>
 </section>
 
 <script src="{{ 'productsgrid.js' | asset_url }}" async></script>
 
 {% schema %}
 {
-    "name": "my schema",
-    "settings": [
-        {
-            "type": "collection",
-            "id": "featured_collection",
-            "label": "Featured collection"
-        },
-        {
-            "type": "select",
-            "id": "select_by_tag",          
-            "label": "Select by tag",          
-            "options": [          
-              {          
-                "value": "all",          
-                "label": "all"          
-              },          
-              {          
-                "value": "banana",          
-                "label": "banana"          
-              },          
-              {          
-                "value": "enjoy",          
-                "label": "enjoy"          
-              },          
-              {          
-                "value": "soft",          
-                "label": "soft"          
-              },        
-              {          
-                "value": "summer",          
-                "label": "summer"          
-              }          
-            ],          
-            "default": "all"
-        },
-        {
-            "type": "number",          
-            "id": "products_number",          
-            "label": "Products number",          
-            "default": 10         
-        }
-    ]
+  "name": "my schema",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "featured_collection",
+      "label": "Featured collection"
+    },
+    {
+      "type": "select",
+      "id": "select_by_tag",
+      "label": "Select by tag",
+      "options": [
+          {
+            "value": "all",
+            "label": "all"
+          },
+          {
+            "value": "banana",
+            "label": "banana"
+          },
+          {
+            "value": "enjoy",
+            "label": "enjoy"
+          },
+          {
+            "value": "soft",
+            "label": "soft"
+          },
+          {
+            "value": "summer",
+            "label": "summer"
+          }
+        ],
+        "default": "all"
+    },
+    {
+      "type": "number",
+      "id": "products_number",
+      "label": "Products number",
+      "default": 10
+    }
+  ]
 }
 {% endschema %}
