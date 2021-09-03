@@ -34,14 +34,12 @@
         -%}       
 
         {% for product in collection_page.products %}
-            
             {% if count > products_number %}
                 {% break %}
             {% endif %}    
 
             {% for tag in product.tags %}                
                 {% if product_tag == "all" or product_tag == tag %}
-                    
                     <div class="product_card_gradi">
                         <h5>
                             <strong>{{ product.title }}</strong>
@@ -73,15 +71,14 @@
                         <span><strong>{{ product.price | money }}</strong></span>
                     </div> 
                     
+                    {% assign count = count | plus: 1 %}
+                    
                     {% if product_tag == 'all' %}
                         {% break %}
                     {% endif %}
                     
-                    {% assign count = count | plus: 1 %}
-
                 {% endif %}                    
             {% endfor %}   
-            
         {% endfor %}
     </div>
     <p>Total products in collection: {{ collection.all_products_count }}</p>
