@@ -27,15 +27,18 @@
     </div>
 
     <div id="products_card_gradi" style="display: flex;">
-
-        {% assign products_number = section.settings.products_number %}
-        {% assign count = 0 %}
+        {%- liquid 
+            assign products_number = section.settings.products_number 
+            assign product_tags = section.settings.select_by_tag
+            assign count = 0
+        -%}       
 
         {% for product in collection_page.products %}
             {% assign count = count | plus: 1 %}
             {% if count > products_number %}
                 {% break %}
-            {% else %}    
+            {% endif %}    
+
                 <div class="product_card_gradi">
                     <h5>
                         <strong>{{ product.title }}</strong>
@@ -53,7 +56,7 @@
                     <div class="tag_box">
                         {% for tag in product.tags %}
                             <span class="specific_tag_gradi"><em>{{ tag }}</em></span>
-                        {% endfor %}
+                        {% endfor %} 
                     </div>
                     <a href="{{ product.url }}">
                         <img 
@@ -66,7 +69,7 @@
                     </a>
                     <span><strong>{{ product.price | money }}</strong></span>
                 </div>
-            {% endif %}
+            
         {% endfor %}
     </div>
     <p>Total products in collection: {{ collection.all_products_count }}</p>
@@ -82,6 +85,34 @@
             "type": "collection",
             "id": "featured_collection",
             "label": "Featured collection"
+        },
+        {
+            "type": "select",
+            "id": "select_by_tag",          
+            "label": "Select by tag",          
+            "options": [          
+              {          
+                "value": "all",          
+                "label": "all"          
+              },          
+              {          
+                "value": "banana",          
+                "label": "banana"          
+              },          
+              {          
+                "value": "enjoy",          
+                "label": "enjoy"          
+              },          
+              {          
+                "value": "soft",          
+                "label": "soft"          
+              },        
+              {          
+                "value": "summer",          
+                "label": "summer"          
+              }          
+            ],          
+            "default": "all"
         },
         {
             "type": "number",          
