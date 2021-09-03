@@ -3,7 +3,7 @@
         You can see all our products
     </h2>
 
-    <div>
+    <!-- <div>
         {% assign collection_page = collections[section.settings.featured_collection] %}
 
         <label for="product_tag_gradi">Select by tag</label>
@@ -24,17 +24,16 @@
             {% endfor %}
             <option value="10" selected>10</option>
         </select>
-    </div>
+    </div> -->
 
     <div id="products_card_gradi" style="display: flex;">
         {%- liquid 
-            assign products_number = section.settings.products_number 
+            assign products_number = section.settings.products_number | minus: 1
             assign product_tag = section.settings.select_by_tag
             assign count = 0
         -%}       
 
         {% for product in collection_page.products %}
-            {% assign count = count | plus: 1 %}
             
             {% if count > products_number %}
                 {% break %}
@@ -73,11 +72,15 @@
                         </a>
                         <span><strong>{{ product.price | money }}</strong></span>
                     </div> 
+                    
+                    {% if product_tag == 'all' %}
+                        {% break %}
+                    {% endif %}
+                    
+                    {% assign count = count | plus: 1 %}
 
                 {% endif %}                    
-            {% endfor %}
-
-                
+            {% endfor %}   
             
         {% endfor %}
     </div>
