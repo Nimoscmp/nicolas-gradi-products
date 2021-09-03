@@ -46,6 +46,36 @@
                 class="gradidiv__product__img">
             </a>
             <span><strong>{{ product.price | money }}</strong></span>
+            <div class="gradidiv__product__radiobox">
+              <!-- <div>
+                <input type="radio" id="pink" name="pink" value="pink" checked>
+                <label for="pink">pink</label>
+              </div>
+              <div>
+                <input type="radio" id="purple" name="purple" value="purple">
+                <label for="purple">purple</label>
+              </div>
+              <div>
+                <input type="radio" id="orange" name="orange" value="orange">
+                <label for="orange">orange</label>
+              </div> -->
+
+              {% assign variants = product.variants %}
+              {% for variant in variants %}
+                <div>
+                  <input 
+                    type="radio" 
+                    id="{{ variant.option1 }}{{ product.title | slice: 0, 3 }}{{ count }}" 
+                    name="{{ product.title }}" 
+                    value="{{ variant.option1 }}{{ product.title | slice: 0, 3 }}{{ count }}" 
+                    class="gradidiv__product__radio gradidiv__product__radio--{{ variant.option1 }}"
+                  {% if variant.option1 == 'pink' %}
+                    checked
+                  {% endif %}>
+                  <label for="{{ variant.option1 }}{{ product.title | slice: 0, 3 }}{{ count }}"></label>
+                </div>
+              {% endfor %}
+            </div>            
           </div>
 
           {% assign count = count | plus: 1 %}
