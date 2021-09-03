@@ -1,8 +1,10 @@
 {
-  "name": "gradiproducts",
   "sections": {
     "main": {
-      "type": "productsgrid"
+      "type": "productsgrid",
+      "settings": {
+        "featured_collection": "all"
+      }
     }
   },
   "order": [
