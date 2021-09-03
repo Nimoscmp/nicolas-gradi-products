@@ -28,40 +28,46 @@
 
     <div id="products_card_gradi" style="display: flex;">
 
+        {% assign products_number = section.settings.products_number %}
+        {% assign count = 0 %}
+
         {% for product in collection_page.products %}
-        <div class="product_card_gradi">
-            <h5>
-                <strong>{{ product.title }}</strong>
-            </h5>
-            <span>
-                {{ product.collections.title }}
-            </span>
-            <div>
-                {% for collection in product.collections %}
-                    {% unless collection.title == "All" %}
-                        <span>{{ collection.title }}</span>
-                    {% endunless %}
-                {% endfor %}
-            </div>
-            <div class="tag_box">
-                {% for tag in product.tags %}
-                    <span class="specific_tag_gradi"><em>{{ tag }}</em></span>
-                {% endfor %}
-            </div>
-            <a href="{{ product.url }}">
-                <img 
-                    src="{{ product | img_url }}" 
-                    alt="{{ product.title }}"
-                    width="100"
-                    height="100"
-                    loading="lazy"
-                >
-            </a>
-            <span><strong>{{ product.price | money }}</strong></span>
-
-        </div>
+            {% assign count = count | plus: 1 %}
+            {% if count > products_number %}
+                {% break %}
+            {% else %}    
+                <div class="product_card_gradi">
+                    <h5>
+                        <strong>{{ product.title }}</strong>
+                    </h5>
+                    <span>
+                        {{ product.collections.title }}
+                    </span>
+                    <div>
+                        {% for collection in product.collections %}
+                            {% unless collection.title == "All" %}
+                                <span>{{ collection.title }}</span>
+                            {% endunless %}
+                        {% endfor %}
+                    </div>
+                    <div class="tag_box">
+                        {% for tag in product.tags %}
+                            <span class="specific_tag_gradi"><em>{{ tag }}</em></span>
+                        {% endfor %}
+                    </div>
+                    <a href="{{ product.url }}">
+                        <img 
+                            src="{{ product | img_url }}" 
+                            alt="{{ product.title }}"
+                            width="100"
+                            height="100"
+                            loading="lazy"
+                        >
+                    </a>
+                    <span><strong>{{ product.price | money }}</strong></span>
+                </div>
+            {% endif %}
         {% endfor %}
-
     </div>
     <p>Total products in collection: {{ collection.all_products_count }}</p>
 </section>
@@ -79,8 +85,8 @@
         },
         {
             "type": "number",          
-            "id": "products_per_page",          
-            "label": "Products per page",          
+            "id": "products_number",          
+            "label": "Products number",          
             "default": 10         
         }
     ]
