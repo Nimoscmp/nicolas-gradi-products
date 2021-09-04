@@ -1,18 +1,18 @@
-const pinkRadio = document.querySelectorAll('.gradidiv__product__radio--pink');
-const purpleRadio = document.querySelectorAll('.gradidiv__product__radio--purple');
-const orangeRadio = document.querySelectorAll('.gradidiv__product__radio--orange');
-const pinkImg = document.getElementsByClassName('gradidiv__product__img--pink');
-const purpleImg = document.getElementsByClassName('gradidiv__product__img--purple');
-const orangeImg = document.getElementsByClassName('gradidiv__product__img--orange');
+let pinkRadio = document.querySelectorAll('.gradidiv__product__radio--pink');
+let purpleRadio = document.querySelectorAll('.gradidiv__product__radio--purple');
+let orangeRadio = document.querySelectorAll('.gradidiv__product__radio--orange');
+let pinkImg = document.getElementsByClassName('gradidiv__product__img--pink');
+let purpleImg = document.getElementsByClassName('gradidiv__product__img--purple');
+let orangeImg = document.getElementsByClassName('gradidiv__product__img--orange');
 
-const pinkLength = pinkRadio.length;
-const purpleLength = purpleRadio.length;
-const orangeLength = orangeRadio.length;
+let pinkLength = pinkRadio.length;
+let purpleLength = purpleRadio.length;
+let orangeLength = orangeRadio.length;
 
 for (let i = 0; i < pinkLength; i++) {
 
   const handleMouseLeave = () => {
-    pinkImg[i].style.display = 'block';
+    pinkImg[i].style.display = 'inline';
     purpleImg[i].style.display = 'none';
     orangeImg[i].style.display = 'none';
     pinkRadio[i].style.borderColor = 'black';
@@ -22,7 +22,7 @@ for (let i = 0; i < pinkLength; i++) {
 
   pinkRadio[i].addEventListener('mouseenter', () => {
     
-    pinkImg[i].style.display = 'block';
+    pinkImg[i].style.display = 'inline';
     purpleImg[i].style.display = 'none';
     orangeImg[i].style.display = 'none';
     pinkRadio[i].style.borderColor = 'black';
@@ -34,7 +34,7 @@ for (let i = 0; i < pinkLength; i++) {
   purpleRadio[i].addEventListener('mouseenter', () => {
     
     pinkImg[i].style.display = 'none';
-    purpleImg[i].style.display = 'block';
+    purpleImg[i].style.display = 'inline';
     orangeImg[i].style.display = 'none';
     purpleRadio[i].style.borderColor = 'black';
     pinkRadio[i].style.borderColor = 'lightgray';
@@ -47,7 +47,7 @@ for (let i = 0; i < pinkLength; i++) {
     
     pinkImg[i].style.display = 'none';
     purpleImg[i].style.display = 'none';
-    orangeImg[i].style.display = 'block';
+    orangeImg[i].style.display = 'inline';
     orangeRadio[i].style.borderColor = 'black';
     pinkRadio[i].style.borderColor = 'lightgray';
 
