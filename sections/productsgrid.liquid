@@ -37,42 +37,29 @@
               {% endfor %}
             </div>
             <a href="{{ product.url }}" class="gradidiv__product__link">
-              <img 
-                src="{{ product | img_url }}" 
-                alt="{{ product.title }}" 
-                width="150"
-                height="150"
-                loading="lazy"
-                class="gradidiv__product__img">
+              {% assign variants = product.variants %}
+              {% for variant in variants %}
+                  <img 
+                    src="{{ variant | img_url }}" 
+                    alt="{{ product.title }}" 
+                    width="150"
+                    height="150"
+                    loading="lazy"
+                    {% if variant.option1 != 'pink' %}
+                      class="gradidiv__product__img--{{ variant.option1 }} gradidiv__product__img--dnone"
+                    {% else %}
+                      class="gradidiv__product__img--{{ variant.option1 }}"  
+                    {% endif %}
+                  >
+              {% endfor %}
             </a>
             <span><strong>{{ product.price | money }}</strong></span>
             <div class="gradidiv__product__radiobox">
-              <!-- <div>
-                <input type="radio" id="pink" name="pink" value="pink" checked>
-                <label for="pink">pink</label>
-              </div>
-              <div>
-                <input type="radio" id="purple" name="purple" value="purple">
-                <label for="purple">purple</label>
-              </div>
-              <div>
-                <input type="radio" id="orange" name="orange" value="orange">
-                <label for="orange">orange</label>
-              </div> -->
-
-              {% assign variants = product.variants %}
+              
               {% for variant in variants %}
                 <div>
-                  <input 
-                    type="radio" 
-                    id="{{ variant.option1 }}{{ product.title | slice: 0, 3 }}{{ count }}" 
-                    name="{{ product.title }}" 
-                    value="{{ variant.option1 }}{{ product.title | slice: 0, 3 }}{{ count }}" 
-                    class="gradidiv__product__radio gradidiv__product__radio--{{ variant.option1 }}"
-                  {% if variant.option1 == 'pink' %}
-                    checked
-                  {% endif %}>
-                  <label for="{{ variant.option1 }}{{ product.title | slice: 0, 3 }}{{ count }}"></label>
+                  <div class="gradidiv__product__radio gradidiv__product__radio--{{ variant.option1 }}">
+                  </div>
                 </div>
               {% endfor %}
             </div>            
