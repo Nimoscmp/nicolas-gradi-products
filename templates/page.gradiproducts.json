@@ -4,7 +4,8 @@
       "type": "productsgrid",
       "settings": {
         "featured_collection": "all",
-        "products_number": 8
+        "select_by_tag": "all",
+        "products_number": 9
       }
     }
   },
