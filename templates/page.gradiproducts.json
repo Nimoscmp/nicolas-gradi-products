@@ -4,7 +4,7 @@
       "type": "productsgrid",
       "settings": {
         "featured_collection": "all",
-        "select_by_tag": "all",
+        "select_by_tag": "banana",
         "products_number": 10
       }
     }
