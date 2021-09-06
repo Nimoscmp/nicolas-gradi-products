@@ -23,6 +23,12 @@
         "price": {
           "type": "price"
         },
+        "variant_color": {
+          "type": "color",        
+          "id": "color_variants",        
+          "label": "Color variants",        
+          "default": "#000000"        
+        },
         "variant_picker": {
           "type": "variant_picker"
         },

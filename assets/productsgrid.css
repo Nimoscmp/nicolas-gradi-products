@@ -31,10 +31,6 @@
   text-decoration: none;
 }
 
-.gradidiv__product__img--dnone {
-  display: none;
-}
-
 .gradidiv__product__radiobox {
   display: flex;
 }
@@ -64,4 +60,26 @@
 
 .gradidiv__product__radio--orange {
   background: radial-gradient(orange 0%, orange 40%, transparent 50%, transparent);
+}
+
+/*
+::::::::::::::::::::::::::
+::::   CHANGE IMAGES  ::::
+::::::::::::::::::::::::::
+*/
+
+.gradidiv__product__img--dnone {
+  display: none;
+}
+
+.gradidiv__product__img--dinline {
+  display: inline;
+}
+
+.gradidiv__product__border-radio--gray {
+  border-color: lightgray;
+}
+
+.gradidiv__product__border-radio--black {
+  border-color: black;
 }
