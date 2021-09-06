@@ -20,7 +20,7 @@
 <section class="page-width">
   <div class="product grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
     <div class="grid__item product__media-wrapper">
-      <slider-component class="slider-mobile-gutter">
+      <!-- <slider-component class="slider-mobile-gutter">
         <a class="skip-to-content-link button visually-hidden" href="#ProductInfo-{{ section.id }}">
           {{ "accessibility.skip_to_product_info" | t }}
         </a>
@@ -50,7 +50,22 @@
           </div>
           <button type="button" class="slider-button slider-button--next" name="next" aria-label="{{ 'accessibility.next_slide' | t }}">{% render 'icon-caret' %}</button>
         </div>
-      </slider-component>
+      </slider-component> -->
+      
+      <div class="product__card">
+        {% assign variants = product.variants %}
+          {% for variant in variants %}
+              <img 
+                src="{{ variant | img_url }}" 
+                alt="{{ product.title }}" 
+                width="250"
+                height="250"
+                loading="lazy"
+                class="product__card-img"
+              >
+          {% endfor %}
+      </div>
+
       {%- if first_3d_model -%}
         <button
           class="button button--full-width product__xr-button"
@@ -198,8 +213,9 @@
                                 value="{{ value | escape }}"
                                 form="product-form-{{ section.id }}"
                                 {% if option.selected_value == value %}checked{% endif %}
+                                class="product-form__input-input"
                           >
-                          <label for="{{ section.id }}-{{ option.name }}-{{ forloop.index0 }}">
+                          <label for="{{ section.id }}-{{ option.name }}-{{ forloop.index0 }}" class="product-form__input-label">
                             {{ value }}
                           </label>
                         {%- endfor -%}
@@ -485,6 +501,8 @@
     ]
   }
 </script>
+
+<script src="{{ 'main-products.js' | asset_url }}" async></script>
 
 {% schema %}
 {
@@ -774,6 +792,11 @@
     }
   ],
   "settings": [
+    {
+      "type": "collection",
+      "id": "featured_collection",
+      "label": "Featured collection"
+    },
     {
       "type": "checkbox",
       "id": "enable_sticky_info",
