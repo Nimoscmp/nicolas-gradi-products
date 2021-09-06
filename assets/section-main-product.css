@@ -147,18 +147,32 @@ fieldset.product-form__input .form__label {
 
 .product-form__input input[type='radio'] + label {
   border: 0.1rem solid rgba(var(--color-foreground), 0.55);
-  border-radius: 4rem;
-  background-color: rgb(var(--color-background));
+  border-radius: 50%;
+  /* background-color: rgb(var(--color-background)); */
   color: rgb(var(--color-foreground));
   display: inline-block;
+  width: 3rem;
+  height: 3rem;
   margin: 0.7rem 0.5rem 0.2rem 0;
-  padding: 1rem 2rem;
+  padding: 1rem;
   font-size: 1.4rem;
   letter-spacing: 0.1rem;
   line-height: 1;
   text-align: center;
   transition: border var(--duration-short) ease;
   cursor: pointer;
+}
+
+.product-form__input--pink + label {
+  background: radial-gradient(pink 0%, pink 40%, transparent 50%, transparent);
+}
+
+.product-form__input--purple + label {
+  background: radial-gradient(purple 0%, purple 40%, transparent 50%, transparent);
+}
+
+.product-form__input--orange + label {
+  background: radial-gradient(orange 0%, orange 40%, transparent 50%, transparent);
 }
 
 .product-form__input input[type='radio'] + label:hover {

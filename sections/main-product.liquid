@@ -213,10 +213,21 @@
                                 value="{{ value | escape }}"
                                 form="product-form-{{ section.id }}"
                                 {% if option.selected_value == value %}checked{% endif %}
-                                class="product-form__input-input"
+                                
+                                
+                                {% case forloop.index0 %}
+                                  {% when 0 %}
+                                    class="product-form__input-input product-form__input--pink"
+                                  {% when 1 %}
+                                    class="product-form__input-input product-form__input--purple"
+                                  {% when 2 %}
+                                    class="product-form__input-input product-form__input--orange"
+                                  {% else %}
+                                    class="product-form__input-input product-form__input--pink"
+                                {% endcase %}
                           >
                           <label for="{{ section.id }}-{{ option.name }}-{{ forloop.index0 }}" class="product-form__input-label">
-                            {{ value }}
+                            <!-- {{ value }} -->
                           </label>
                         {%- endfor -%}
                       </fieldset>
