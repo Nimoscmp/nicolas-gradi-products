@@ -38,8 +38,25 @@
             </div>
             <a href="{{ product.url }}" class="gradidiv__product__link">
               {% assign variants = product.variants %}
+
               {% for variant in variants %}
-                  <img 
+
+                {% assign variantImg = variant | img_url %}
+                {% assign newUrl = variantImg %}                            
+                {% assign url = '' %}
+
+                  {% if forloop.index0 != 0 %}
+                    
+                    {% continue %}              
+
+                  {% endif %}
+
+                  {% assign myNewUrl = url | concat: newUrl %}
+                  <!-- {% capture finalUrls %}
+                    {{ myNewUrl }}
+                  {% endcapture %}  -->
+                  
+                  <img
                     src="{{ variant | img_url }}" 
                     alt="{{ product.title }}" 
                     width="150"
@@ -76,9 +93,27 @@
     {% endfor %}
   </div>
   <p>Total products in collection: {{ collection.all_products_count }}</p>
+
+  {% assign test = 0 %}
 </section>
 
 <script src="{{ 'productsgrid.js' | asset_url }}" async></script>
+
+<script>
+
+  let urls = '';
+  let print = '{{ myNewUrl }}'
+
+  for (let i = 0; i < 3; i++) {
+
+    urls = urls + '{{ newUrl }}'
+    
+  }
+
+  console.log(urls);
+  console.log(print);
+
+</script>
 
 {% schema %}
 {
