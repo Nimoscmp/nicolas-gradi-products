@@ -8,7 +8,25 @@
   </div>
 
   <div class="minicart__items"> 
-    
+    {% assign lineItems = cart.items %}
+    {% for item in lineItems %}
+      <p>{{ item.title }}</p>
+      <img 
+        src="{{ item.variant | img_url }}" 
+        alt="{{ product.title }}" 
+        width="150"
+        height="150"
+        loading="lazy"
+        class="minicart__img"
+      >
+      <i class="fas fa-plus fa-2x"></i>
+      <input 
+        type="number" 
+        value="{{ item.quantity }}"
+        class="minicart__input">
+      <i class="fas fa-minus fa-2x"></i>
+      <span>{{ item.final_line_price | money }}</span>
+    {% endfor %}
   </div>
 
 </div>

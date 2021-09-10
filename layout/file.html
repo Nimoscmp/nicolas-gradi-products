@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+
+    div {
+      width: 20px;
+      height: 20px;
+      background-color: red;
+    }
+
+    .main {
+      width: 400px;
+      height: 400px;
+      background-color: gray;
+    }
+
+  </style>
+</head>
+<body>
+  
+  <main id="main">
+
+  </main>
+
+  <script>
+    
+    const main = document.getElementById('main');
+    
+    function myFunction() {
+      const div = document.createElement('div');
+      //var textnode = document.createTextNode("Water");
+      //node.appendChild(textnode);
+      main.appendChild(div);
+    }
+
+    for (let i = 0; i < 6; i++) {
+      myFunction();
+    } 
+
+  </script>
+
+</body>
+</html>
