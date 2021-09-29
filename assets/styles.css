@@ -1,0 +1,15 @@
+.minicart {
+  width: 40%;
+  min-width: 30rem;
+  height: 100vh;
+  position: fixed;
+  margin-right: -70%;
+  z-index: 100;
+  top: 0;
+  right: 0;
+  background-color: #f1f1f1;
+  transition: all 0.3s ease-in-out; }
+
+.minicart--show {
+  margin-right: 0; }
+
